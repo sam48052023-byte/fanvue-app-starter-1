@@ -9,16 +9,15 @@ export async function getCurrentUser() {
   if (Date.now() >= session.expiresAt - 30_000 && session.refreshToken) {
     try {
       const refreshed = await refreshAccessToken(session.refreshToken);
-      session = {
-        ...session,
+      const updatedSession = {
         accessToken: refreshed.access_token,
         refreshToken: refreshed.refresh_token ?? session.refreshToken,
         tokenType: refreshed.token_type,
         scope: refreshed.scope ?? session.scope,
-        idToken: refreshed.id_token ?? session.idToken,
         expiresAt: Date.now() + refreshed.expires_in * 1000,
       };
-      await setSession(session);
+      await setSession(updatedSession);
+      session = updatedSession;
     } catch {}
   }
 

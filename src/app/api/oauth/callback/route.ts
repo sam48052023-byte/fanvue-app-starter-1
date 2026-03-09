@@ -43,7 +43,6 @@ export async function GET(request: Request) {
       refreshToken: token.refresh_token,
       tokenType: token.token_type,
       scope: token.scope,
-      idToken: token.id_token,
       expiresAt: Date.now() + token.expires_in * 1000,
     });
 
@@ -91,7 +90,6 @@ export async function POST(request: Request) {
       refreshToken: token.refresh_token,
       tokenType: token.token_type,
       scope: token.scope,
-      idToken: token.id_token,
       expiresAt: Date.now() + token.expires_in * 1000,
     });
     return NextResponse.redirect(new URL(`${env.BASE_URL}/`, request.url));
