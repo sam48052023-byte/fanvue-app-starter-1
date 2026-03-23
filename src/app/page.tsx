@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { getCurrentUser } from "@/lib/fanvue";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const me = await getCurrentUser();
   const isAuthed = !!me;
