@@ -17,7 +17,46 @@ pnpm install
 pnpm dev
 ```
 
-3. Generate an SSL certificate and https proxy for local development:
+3. Set up HTTPS for local development:
+
+#### Option A: Using [portless](https://github.com/vercel-labs/portless) (Recommended)
+
+Portless gives you stable, named `.localhost` URLs with automatic HTTPS/HTTP2 — no manual cert generation or hosts file editing.
+
+```bash
+npm install -g portless
+```
+
+One-time setup (generates and trusts certs automatically):
+
+```bash
+portless proxy start --https
+```
+
+Update your `package.json` dev script:
+
+```json
+{
+  "scripts": {
+    "dev": "portless run next dev"
+  }
+}
+```
+
+Then run:
+
+```bash
+pnpm dev
+# -> https://fanvue-app-starter.localhost
+```
+
+Now set your redirect URI in the Fanvue UI to match:
+
+```
+https://fanvue-app-starter.localhost/api/oauth/callback
+```
+
+#### Option B: Manual mkcert + local-ssl-proxy
 
 Insert the actual name of your app instead of `[your-app-name-here]`
 
@@ -41,7 +80,7 @@ Then run the local SSL proxy
 npx local-ssl-proxy --source 3001 --target 3000 --cert ./[your-app-name-here].dev.pem --key ./[your-app-name-here].dev-key.pem
 ```
 
-Now setup your redirect URI in the fanvue UI to match:
+Now setup your redirect URI in the Fanvue UI to match:
 
 ```
 https://[your-app-name-here].dev:3001/api/oauth/callback

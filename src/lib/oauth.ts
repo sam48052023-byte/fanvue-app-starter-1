@@ -39,7 +39,8 @@ export function getAuthorizeUrl({
     code_challenge_method: "S256",
   });
   if (env.OAUTH_RESPONSE_MODE) params.set("response_mode", env.OAUTH_RESPONSE_MODE);
-  if (env.OAUTH_PROMPT) params.set("prompt", env.OAUTH_PROMPT);
+  // Force login prompt to allow switching accounts
+  params.set("prompt", env.OAUTH_PROMPT || "login");
   return `${oauthConfig.issuerBaseURL}/oauth2/auth?${params.toString()}`;
 }
 

@@ -8,7 +8,6 @@ type SessionPayload = {
   expiresAt: number;
   tokenType?: string;
   scope?: string;
-  idToken?: string;
 };
 
 const encoder = new TextEncoder();
