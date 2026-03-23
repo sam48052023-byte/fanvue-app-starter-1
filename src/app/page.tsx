@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getCurrentUser } from "@/lib/fanvue";
 
-export default async function Home({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
+export default async function Home({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const me = await getCurrentUser();
   const isAuthed = !!me;
   const params = await searchParams;
