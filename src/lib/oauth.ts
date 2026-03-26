@@ -32,7 +32,7 @@ export function getAuthorizeUrl({
   const params = new URLSearchParams({
     response_type: "code",
     client_id: oauthConfig.clientId,
-    redirect_uri: redirectUri ?? env.OAUTH_REDIRECT_URI ?? oauthConfig.redirectUri ?? "",
+    redirect_uri: "https://fanvue-app-starter-bice.vercel.app/api/oauth/callback",
     scope: `${DEFAULT_SCOPES} ${env.OAUTH_SCOPES ?? ""}`,
     state,
     code_challenge: codeChallenge,
@@ -41,7 +41,7 @@ export function getAuthorizeUrl({
   if (env.OAUTH_RESPONSE_MODE) params.set("response_mode", env.OAUTH_RESPONSE_MODE);
   // Force login prompt to allow switching accounts
   params.set("prompt", env.OAUTH_PROMPT || "login");
-  return `${oauthConfig.issuerBaseURL}/oauth2/auth?${params.toString()}`;
+  return `https://auth.fanvue.com/oauth2/auth?${params.toString()}`;
 }
 
 export async function exchangeCodeForToken({
