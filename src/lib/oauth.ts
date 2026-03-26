@@ -32,7 +32,7 @@ export function getAuthorizeUrl({
   const params = new URLSearchParams({
     response_type: "code",
     client_id: oauthConfig.clientId,
-    redirect_uri: redirectUri ?? env.OAUTH_REDIRECT_URI ?? oauthConfig.redirectUri ?? "",
+    redirect_uri: "https://fanvue-app-starter-bice.vercel.app/api/oauth/callback",
     scope: `${DEFAULT_SCOPES} ${env.OAUTH_SCOPES ?? ""}`,
     state,
     code_challenge: codeChallenge,
